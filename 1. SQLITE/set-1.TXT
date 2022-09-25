@@ -1,0 +1,246 @@
+CREATE TABLE DEPARTMEN63
+(
+DEPT_NO INT PRIMARY KEY,
+DEPT_NAME VARCHAR,
+LOCATION VARCHAR
+);
+INSERT INTO DEPARTMENT63
+VALUES(1,'SALES','DELHI');
+INSERT INTO DEPARTMENT63
+VALUES(2,'PRODUCTION','MUMBAI');
+INSERT INTO DEPARTMENT63
+VALUES(3,'IT','HYDRABAD');
+INSERT INTO DEPARTMENT63
+VALUES(4,'MARKETING','AHEMDABAD');
+INSERT INTO DEPARTMENT63
+VALUES(5,'ANALYSIS','SURAT');
+INSERT INTO DEPARTMENT63
+VALUES(6,'BCA','MP');
+INSERT INTO DEPARTMENT63
+VALUES(7,'BBA','BARODA');
+
+sqlite> .mode table
+sqlite> SELECT * FROM DEPARTMENT;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDRABAD  |
+| 4       | MARKETING  | AHEMDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARODA    |
++---------+------------+-----------+
+
+
+CREATE TABLE EMPLOYEE63
+(
+EMP_ID INT,
+EMP_NAME VARCHAR,
+GENDER VARCHAR,
+DEPT_NO INT REFERENCES DEPARTMENT63(DEPT_NO),
+ADDRESS VARCHAR,
+DESIGNATION VARCHAR,
+SALARY INT,
+EXPERIENCE TEXT,
+EMAIL TEXT
+);
+INSERT INTO EMPLOYEE63
+VALUES(1,'DHRUV','MALE',1,'BARDOLI','MANAGER',50000,'3 YEAR','dhruv01@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(2,'VINIT','MALE',2,'ORNA','POEN',15000,'4 YEAR','vinitdon1@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(3,'JENIL','MALE',3,'KAMREJ','HR',45000,'5 YEAR','JENIL1@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(4,'ISHA','FEMALE',4,'NAVSARI','MANAGER',40000,'4 YEAR','ISHA05@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(5,'SHRUTI','FEMALE',5,'MADHI','HR',20000,'2 YEAR','SHRUTI5@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(6,'OM','MALE',6,'VYARA','CEO',20000,'6 YEAR','OM005@gmail.com');
+INSERT INTO EMPLOYEE63
+VALUES(7,'HENY','FEMALE',7,'PALSANA','MANAGER',25000,'5 YEAR','HENY505@gmail.com');
+
+sqlite> select * from employee;
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |        EMAIL        |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| 1      | DHRUV    | MALE   | 1       | BARDOLI | MANAGER     | 50000  | 3 YEAR     | dhruv01@gmail.com   |
+| 2      | VINIT    | MALE   | 2       | ORNA    | POEN        | 15000  | 4 YEAR     | vinitdon1@gmail.com |
+| 3      | JENIL    | MALE   | 3       | KAMREJ  | HR          | 45000  | 5 YEAR     | JENIL1@gmail.com    |
+| 4      | ISHA     | FEMALE | 4       | NAVSARI | MANAGER     | 40000  | 4 YEAR     | ISHA05@gmail.com    |
+| 5      | SHRUTI   | FEMALE | 5       | MADHI   | HR          | 20000  | 2 YEAR     | SHRUTI5@gmail.com   |
+| 6      | OM       | MALE   | 6       | VYARA   | CEO         | 20000  | 6 YEAR     | OM005@gmail.com     |
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 25000  | 5 YEAR     | HENY505@gmail.com   |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+
+*QUERY:-
+
+
+1)sqlite> SELECT * FROM DEPARTMENT63 WHERE LOCATION='SURAT';
++---------+-----------+----------+
+| DEPT_NO | DEPT_NAME | LOCATION |
++---------+-----------+----------+
+| 5       | ANALYSIS  | SURAT    |
++---------+-----------+----------+
+
+2)sqlite> SELECT * FROM DEPARTMENT63
+   ...> WHERE DEPT_NAME LIKE '%A';
++---------+-----------+----------+
+| DEPT_NO | DEPT_NAME | LOCATION |
++---------+-----------+----------+
+| 6       | BCA       | MP       |
+| 7       | BBA       | BARODA   |
++---------+-----------+----------+
+
+3)sqlite> select * from department63 where dept_no between 1 and 100;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDRABAD  |
+| 4       | MARKETING  | AHEMDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | BBA        | BARODA    |
++---------+------------+-----------+
+
+4)sqlite> delete from department63 where dept_name="trg";
+
+5)sqlite> update department63 set dept_name="IT" where dept_name="BBA";
+sqlite> select * from department63;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 1       | SALES      | DELHI     |
+| 2       | PRODUCTION | MUMBAI    |
+| 3       | IT         | HYDRABAD  |
+| 4       | MARKETING  | AHEMDABAD |
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 7       | IT         | BARODA    |
++---------+------------+-----------+
+
+6)sqlite>  select * from department63 where dept_name like "_a%";
++---------+-----------+-----------+
+| DEPT_NO | DEPT_NAME | LOCATION  |
++---------+-----------+-----------+
+| 1       | SALES     | DELHI     |
+| 4       | MARKETING | AHEMDABAD |
++---------+-----------+-----------+
+
+7)sqlite> select * from department63 where location in ("SURAT","AHEMDABAD","BARODA");
++---------+-----------+-----------+
+| DEPT_NO | DEPT_NAME | LOCATION  |
++---------+-----------+-----------+
+| 4       | MARKETING | AHEMDABAD |
+| 5       | ANALYSIS  | SURAT     |
+| 7       | IT        | BARODA    |
++---------+-----------+-----------+
+
+8)sqlite> select * from department63 where dept_name NOT IN ("SALES","MARKETING");
++---------+------------+----------+
+| DEPT_NO | DEPT_NAME  | LOCATION |
++---------+------------+----------+
+| 2       | PRODUCTION | MUMBAI   |
+| 3       | IT         | HYDRABAD |
+| 5       | ANALYSIS   | SURAT    |
+| 6       | BCA        | MP       |
+| 7       | IT         | BARODA   |
++---------+------------+----------+
+
+
+9)sqlite> select * from department63 order by dept_name asc;
++---------+------------+-----------+
+| DEPT_NO | DEPT_NAME  | LOCATION  |
++---------+------------+-----------+
+| 5       | ANALYSIS   | SURAT     |
+| 6       | BCA        | MP        |
+| 3       | IT         | HYDRABAD  |
+| 7       | IT         | BARODA    |
+| 4       | MARKETING  | AHEMDABAD |
+| 2       | PRODUCTION | MUMBAI    |
+| 1       | SALES      | DELHI     |
++---------+------------+-----------+
+
+10)sqlite> select * from employee63 where gender="FEMALE";
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |       EMAIL       |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| 4      | ISHA     | FEMALE | 4       | NAVSARI | MANAGER     | 40000  | 4 YEAR     | ISHA05@gmail.com  |
+| 5      | SHRUTI   | FEMALE | 5       | MADHI   | HR          | 20000  | 2 YEAR     | SHRUTI5@gmail.com |
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 25000  | 5 YEAR     | HENY505@gmail.com |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+
+11)sqlite> select * from employee63 order by emp_name;
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |        EMAIL        |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| 1      | DHRUV    | MALE   | 1       | BARDOLI | MANAGER     | 50000  | 3 YEAR     | dhruv01@gmail.com   |
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 25000  | 5 YEAR     | HENY505@gmail.com   |
+| 4      | ISHA     | FEMALE | 4       | NAVSARI | MANAGER     | 40000  | 4 YEAR     | ISHA05@gmail.com    |
+| 3      | JENIL    | MALE   | 3       | KAMREJ  | HR          | 45000  | 5 YEAR     | JENIL1@gmail.com    |
+| 6      | OM       | MALE   | 6       | VYARA   | CEO         | 20000  | 6 YEAR     | OM005@gmail.com     |
+| 5      | SHRUTI   | FEMALE | 5       | MADHI   | HR          | 20000  | 2 YEAR     | SHRUTI5@gmail.com   |
+| 2      | VINIT    | MALE   | 2       | ORNA    | POEN        | 15000  | 4 YEAR     | vinitdon1@gmail.com |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+
+12)sqlite> select * from employee63 where SALARY < 50000 and SALARY >20000;
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |       EMAIL       |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| 3      | JENIL    | MALE   | 3       | KAMREJ  | HR          | 45000  | 5 YEAR     | JENIL1@gmail.com  |
+| 4      | ISHA     | FEMALE | 4       | NAVSARI | MANAGER     | 40000  | 4 YEAR     | ISHA05@gmail.com  |
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 25000  | 5 YEAR     | HENY505@gmail.com |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+
+13)sqlite> select EMP_NAME, DESIGNATION from employee63 where GENDER="FEMALE" order by DESIGNATION desc;
++----------+-------------+
+| EMP_NAME | DESIGNATION |
++----------+-------------+
+| ISHA     | MANAGER     |
+| HENY     | MANAGER     |
+| SHRUTI   | HR          |
++----------+-------------+
+
+14)sqlite> select * from employee63 where EMP_NAME like "a%a";
+
+15)sqlite> select EMP_NAME,min(SALARY) as SALARY from employee63;
++----------+--------+
+| EMP_NAME | SALARY |
++----------+--------+
+| VINIT    | 15000  |
++----------+--------+
+
+16)sqlite> update employee63 set SALARY=SALARY+(SALARY*10)/100
+   ...> WHERE DEPT_NO=(SELECT DEPT_NO FROM DEPARTMENT63 WHERE DEPT_NAME="IT");
+  sqlite> select * from employee63;
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |        EMAIL        |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+| 1      | DHRUV    | MALE   | 1       | BARDOLI | MANAGER     | 55000  | 3 YEAR     | dhruv01@gmail.com   |
+| 2      | VINIT    | MALE   | 2       | ORNA    | POEN        | 16500  | 4 YEAR     | vinitdon1@gmail.com |
+| 3      | JENIL    | MALE   | 3       | KAMREJ  | HR          | 54450  | 5 YEAR     | JENIL1@gmail.com    |
+| 4      | ISHA     | FEMALE | 4       | NAVSARI | MANAGER     | 44000  | 4 YEAR     | ISHA05@gmail.com    |
+| 5      | SHRUTI   | FEMALE | 5       | MADHI   | HR          | 22000  | 2 YEAR     | SHRUTI5@gmail.com   |
+| 6      | OM       | MALE   | 6       | VYARA   | CEO         | 22000  | 6 YEAR     | OM005@gmail.com     |
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 27500  | 5 YEAR     | HENY505@gmail.com   |
++--------+----------+--------+---------+---------+-------------+--------+------------+---------------------+
+
+17)sqlite> select * from employee63 where EXPERIENCE < 1;
+
+18)sqlite> select * from employee63 where EXPERIENCE > 5 group by EMP_NAME;
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| EMP_ID | EMP_NAME | GENDER | DEPT_NO | ADDRESS | DESIGNATION | SALARY | EXPERIENCE |       EMAIL       |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+| 7      | HENY     | FEMALE | 7       | PALSANA | MANAGER     | 25000  | 5 YEAR     | HENY505@gmail.com |
+| 3      | JENIL    | MALE   | 3       | KAMREJ  | HR          | 45000  | 5 YEAR     | JENIL1@gmail.com  |
+| 6      | OM       | MALE   | 6       | VYARA   | CEO         | 20000  | 6 YEAR     | OM005@gmail.com   |
++--------+----------+--------+---------+---------+-------------+--------+------------+-------------------+
+
+19)sqlite> SELECT * FROM DEPARTMENT63
+   ...> WHERE DEPT_NO NOT IN (SELECT DEPT_NO FROM EMPLOYEE63);
+
+20)sqlite> DELETE FROM EMPLOYEE63
+   ...> WHERE SALARY<10000;

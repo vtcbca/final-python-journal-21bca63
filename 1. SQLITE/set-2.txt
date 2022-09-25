@@ -1,0 +1,291 @@
+sqlite> create table student
+   ...> (
+   ...> rollno int primary key,
+   ...> name varchar(20),
+   ...> class varchar(10),
+   ...> birthday text
+   ...> );
+sqlite> insert into student
+   ...> values(1,'Dhruv','SY','01-jan-2003');
+sqlite> insert into student
+   ...> values(2,'Zenil','SY','03-dec-2003');
+sqlite> insert into student
+   ...> values(3,'Jensi','sY','28-feb-2004');
+sqlite> insert into student
+   ...> values(4,'Dev','TY','22-may-2002');
+sqlite> insert into student
+   ...> values(5,'Harsh','FY','01-dec-2002');
+sqlite> insert into student
+   ...> values(6,'Param','FY','20-june-2003');
+sqlite> insert into student
+   ...> values(7,'Isha','SY','20-aug-2004');
+sqlite> insert into student
+   ...> values(8,'Om','TY','24-nov-2001');
+sqlite> insert into student
+   ...> values(9,'Nishi','FY','25-may-2004');
+sqlite> insert into student
+   ...> values(10,'Kush','FY','25-jan-2005');
+sqlite> select * from student;
++--------+-------+-------+--------------+
+| rollno | name  | class |   birthday   |
++--------+-------+-------+--------------+
+| 1      | Dhruv | SY    | 01-jan-2003  |
+| 2      | Zenil | SY    | 03-dec-2003  |
+| 3      | Jensi | sY    | 28-feb-2004  |
+| 4      | Dev   | TY    | 22-may-2002  |
+| 5      | Harsh | FY    | 01-dec-2002  |
+| 6      | Param | FY    | 20-june-2003 |
+| 7      | Isha  | SY    | 20-aug-2004  |
+| 8      | Om    | TY    | 24-nov-2001  |
+| 9      | Nishi | FY    | 25-may-2004  |
+| 10     | Kush  | FY    | 25-jan-2005  |
++--------+-------+-------+--------------+
+sqlite> create table course 
+  ...>(
+  ...>courseno int primary key,
+  ...>coursename varchar(20),
+  ...>max_marks default(100),
+  ...>pass_marks default(35)
+  ...>);
+
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(101,'DATABASE MANAGEMENT SYSTEM');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(102,'COMPUTER NETWORK');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(103,'DATA SCIENCE');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(104,'MACHINE LEARNING');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(105,'DIGITAL MARKETER');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(106,'AI ENGINEER');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(107,'SOFTWARE DEVELOPER');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(108,'BIG DATA');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(109,'CYBER SECURITY');
+sqlite> INSERT INTO COURSE(COURSENO,COURSENAME)
+   ...> VALUES(110,'MANAGEMENT');
+
+sqlite> select * from course;
++----------+----------------------------+-----------+------------+
+| courseno |         coursename         | max_marks | pass_marks |
++----------+----------------------------+-----------+------------+
+| 101      | DATABASE MANAGEMENT SYSTEM | 100       | 35         |
+| 102      | COMPUTER NETWORK           | 100       | 35         |
+| 103      | DATA SCIENCE               | 100       | 35         |
+| 104      | MACHINE LEARNING           | 100       | 35         |
+| 105      | DIGITAL MARKETER           | 100       | 35         |
+| 106      | AI ENGINEER                | 100       | 35         |
+| 107      | SOFTWARE DEVELOPER         | 100       | 35         |
+| 108      | BIG DATA                   | 100       | 35         |
+| 109      | CYBER SECURITY             | 100       | 35         |
+| 110      | MANAGEMENT                 | 100       | 35         |
++----------+----------------------------+-----------+------------+
+
+sqlite> CREATE TABLE SC
+   ...> (
+   ...> ROLLNO INT,
+   ...> COURSENO INT,
+   ...> MARKS INT,
+   ...> PRIMARY KEY(ROLLNO,COURSENO),
+   ...> FOREIGN KEY(ROLLNO) REFERENCES STUDENT(ROLLNO),
+   ...> FOREIGN KEY(COURSENO) REFERENCES COURSE(COURSENO)
+   ...> );
+sqlite> INSERT INTO SC
+   ...> VALUES(1,101,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(2,101,93);
+sqlite> INSERT INTO SC
+   ...> VALUES(3,101,60);
+sqlite> INSERT INTO SC
+   ...> VALUES(4,101,30);
+sqlite> INSERT INTO SC
+   ...> VALUES(10,102,60);
+sqlite> INSERT INTO SC
+   ...> VALUES(10,103,80);
+sqlite> INSERT INTO SC
+   ...> VALUES(5,102,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(7,102,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(2,103,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(8,104,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(5,105,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(9,105,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(10,106,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(2,107,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(3,106,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(7,107,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(4,109,90);
+sqlite> INSERT INTO SC
+   ...> VALUES(9,102,30);
+sqlite> INSERT INTO SC
+   ...> VALUES(5,101,30);
+sqlite> INSERT INTO SC
+   ...> VALUES(5,109,110);
+
+sqlite> select * from sc;
++--------+----------+-------+
+| ROLLNO | COURSENO | MARKS |
++--------+----------+-------+
+| 1      | 101      | 90    |
+| 2      | 101      | 93    |
+| 3      | 101      | 60    |
+| 4      | 101      | 30    |
+| 10     | 102      | 60    |
+| 10     | 103      | 80    |
+| 5      | 102      | 90    |
+| 7      | 102      | 90    |
+| 2      | 103      | 90    |
+| 8      | 104      | 90    |
+| 5      | 105      | 90    |
+| 9      | 105      | 90    |
+| 10     | 106      | 90    |
+| 2      | 107      | 90    |
+| 3      | 106      | 90    |
+| 7      | 107      | 90    |
+| 4      | 109      | 90    |
+| 9      | 102      | 30    |
+| 5      | 101      | 30    |
+| 5      | 109      | 110   |
++--------+----------+-------+
+
+
+QUREY:-
+
+1)sqlite> SELECT S.*,C.*,M.* FROM STUDENT S,COURSE C, SC M
+   ...> WHERE M.MARKS>70 AND C.COURSENAME="COMPUTER NETWORK" AND M.ROLLNO IN(SELECT ROLLNO FROM SC WHERE ROLLNO NOT IN (SELECT ROLLNO FROM SC,COURSE WHERE MARKS<C.PASS_MARKS))
+   ...> AND S.ROLLNO=M.ROLLNO AND C.COURSENO=M.COURSENO;
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+
+| rollno | name | class |  birthday   | courseno |    coursename    | max_marks | pass_marks | ROLLNO | COURSENO | MARKS |
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+
+| 7      | Isha | SY    | 20-aug-2004 | 102      | COMPUTER NETWORK | 100       | 35         | 7      | 102      | 90    |
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+
+sqlite>
+2)sqlite> SELECT S.*,C.*,M.*,M.MARKS=(M.MARKS*100/100) FROM STUDENT S,COURSE C, SC M
+   ...> WHERE M.MARKS>70 AND C.COURSENAME="COMPUTER NETWORK" AND M.ROLLNO IN(SELECT ROLLNO FROM SC WHERE ROLLNO NOT IN (SELECT ROLLNO FROM SC,COURSE WHERE MARKS<C.PASS_MARKS))
+   ...> AND S.ROLLNO=M.ROLLNO AND C.COURSENO=M.COURSENO;
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+---------------------------+
+| rollno | name | class |  birthday   | courseno |    coursename    | max_marks | pass_marks | ROLLNO | COURSENO | MARKS | M.MARKS=(M.MARKS*100/100) |
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+---------------------------+
+| 7      | Isha | SY    | 20-aug-2004 | 102      | COMPUTER NETWORK | 100       | 35         | 7      | 102      | 90    | 1                         |
++--------+------+-------+-------------+----------+------------------+-----------+------------+--------+----------+-------+---------------------------+
+sqlite>
+3)sqlite> SELECT S.NAME,M.MARKS=(M.MARKS*100/100) FROM STUDENT S,COURSE C, SC M
+   ...> WHERE M.MARKS>70 AND C.COURSENAME="COMPUTER NETWORK" AND M.ROLLNO IN(SELECT ROLLNO FROM SC WHERE ROLLNO NOT IN (SELECT ROLLNO FROM SC,COURSE WHERE MARKS<C.PASS_MARKS))
+   ...> AND S.ROLLNO=M.ROLLNO AND C.COURSENO=M.COURSENO;
++------+---------------------------+
+| name | M.MARKS=(M.MARKS*100/100) |
++------+---------------------------+
+| Isha | 1                         |
++------+---------------------------+
+4)sqlite> SELECT ROLLNO,AVG(MARKS) "AVERAGE MARKS SCORED BY STUDENT" FROM SC
+   ...> GROUP BY ROLLNO;
++--------+---------------------------------+
+| ROLLNO | AVERAGE MARKS SCORED BY STUDENT |
++--------+---------------------------------+
+| 1      | 90.0                            |
+| 2      | 91.0                            |
+| 3      | 75.0                            |
+| 4      | 60.0                            |
+| 5      | 80.0                            |
+| 7      | 90.0                            |
+| 8      | 90.0                            |
+| 9      | 60.0                            |
+| 10     | 76.6666666666667                |
++--------+---------------------------------+
+5)sqlite> SELECT *,AVG(PASS_MARKS) FROM COURSE
+   ...> GROUP BY COURSENAME
+   ...> HAVING PASS_MARKS>30;
++----------+----------------------------+-----------+------------+-----------------+
+| courseno |         coursename         | max_marks | pass_marks | AVG(PASS_MARKS) |
++----------+----------------------------+-----------+------------+-----------------+
+| 106      | AI ENGINEER                | 100       | 35         | 35.0            |
+| 108      | BIG DATA                   | 100       | 35         | 35.0            |
+| 102      | COMPUTER NETWORK           | 100       | 35         | 35.0            |
+| 109      | CYBER SECURITY             | 100       | 35         | 35.0            |
+| 103      | DATA SCIENCE               | 100       | 35         | 35.0            |
+| 101      | DATABASE MANAGEMENT SYSTEM | 100       | 35         | 35.0            |
+| 105      | DIGITAL MARKETER           | 100       | 35         | 35.0            |
+| 104      | MACHINE LEARNING           | 100       | 35         | 35.0            |
+| 110      | MANAGEMENT                 | 100       | 35         | 35.0            |
+| 107      | SOFTWARE DEVELOPER         | 100       | 35         | 35.0            |
++----------+----------------------------+-----------+------------+-----------------+
+6)sqlite> SELECT COURSENAME FROM COURSE;
++----------------------------+
+|         coursename         |
++----------------------------+
+| DATABASE MANAGEMENT SYSTEM |
+| COMPUTER NETWORK           |
+| DATA SCIENCE               |
+| MACHINE LEARNING           |
+| DIGITAL MARKETER           |
+| AI ENGINEER                |
+| SOFTWARE DEVELOPER         |
+| BIG DATA                   |
+| CYBER SECURITY             |
+| MANAGEMENT                 |
++----------------------------+
+7)sqlite> SELECT *,MAX(MARKS) FROM SC M,STUDENT S
+   ...> WHERE S.ROLLNO=M.ROLLNO AND M.COURSENO=(SELECT COURSENO FROM COURSE WHERE COURSENAME='COMPUTER NETWORK');
++--------+----------+-------+--------+-------+-------+-------------+------------+
+| ROLLNO | COURSENO | MARKS | rollno | name  | class |  birthday   | MAX(MARKS) |
++--------+----------+-------+--------+-------+-------+-------------+------------+
+| 5      | 102      | 90    | 5      | Harsh | FY    | 01-dec-2002 | 90         |
++--------+----------+-------+--------+-------+-------+-------------+------------+
+8)sqlite> SELECT S.*,C.COURSENAME FROM STUDENT S,SC M,COURSE C
+   ...> WHERE S.ROLLNO=M.ROLLNO AND C.COURSENO=M.COURSENO AND S.CLASS='SY';
++--------+-------+-------+-------------+----------------------------+
+| rollno | name  | class |  birthday   |         coursename         |
++--------+-------+-------+-------------+----------------------------+
+| 1      | Dhruv | SY    | 01-jan-2003 | DATABASE MANAGEMENT SYSTEM |
+| 2      | Zenil | SY    | 03-dec-2003 | DATABASE MANAGEMENT SYSTEM |
+| 2      | Zenil | SY    | 03-dec-2003 | DATA SCIENCE               |
+| 2      | Zenil | SY    | 03-dec-2003 | SOFTWARE DEVELOPER         |
+| 7      | Isha  | SY    | 20-aug-2004 | COMPUTER NETWORK           |
+| 7      | Isha  | SY    | 20-aug-2004 | SOFTWARE DEVELOPER         |
++--------+-------+-------+-------------+----------------------------+
+9)sqlite> SELECT *,AVG(MARKS) FROM SC
+   ...> GROUP BY ROLLNO;
++--------+----------+-------+------------------+
+| ROLLNO | COURSENO | MARKS |    AVG(MARKS)    |
++--------+----------+-------+------------------+
+| 1      | 101      | 90    | 90.0             |
+| 2      | 101      | 93    | 91.0             |
+| 3      | 101      | 60    | 75.0             |
+| 4      | 101      | 30    | 60.0             |
+| 5      | 101      | 30    | 80.0             |
+| 7      | 102      | 90    | 90.0             |
+| 8      | 104      | 90    | 90.0             |
+| 9      | 102      | 30    | 60.0             |
+| 10     | 102      | 60    | 76.6666666666667 |
++--------+----------+-------+------------------+
+10)sqlite> CREATE TRIGGER DEL_TRG
+   ...> BEFORE DELETE ON STUDENT
+   ...> BEGIN
+   ...> SELECT CASE
+   ...> WHEN (SELECT S.*,C.*,M.* FROM STUDENT S, COURSE C,SC M WHERE S.ROLLNO=M.ROLLNO AND C.COURSENO=M.COURSENO AND C.PASS_MARKS>35)
+   ...> THEN RAISE(ABORT,'WHEN THE SUBJECT HAVE PASSING MARKS MORE THEN 35 ')
+   ...> END;
+   ...> END;
+sqlite> CREATE TRIGGER INSR_TRG
+   ...>
+   ...> BEFORE INSERT ON SC
+   ...> BEGIN
+   ...> SELECT
+   ...> CASE
+   ...> WHEN NEW.MARKS>100 OR NEW.MARKS<0
+   ...> THEN RAISE (ABORT,'PLEASE ENTER MARKS BETWEEEN 0 TO 100')
+   ...> END;
+   ...> END;
